@@ -9,7 +9,7 @@ fun main(){
     println("2. Kind")
     println("3. Entity")
 
-    val a= print("Please enter the choice here: ")
+    val a= print("Please enter the numeric choice here: ")
     val choice = readLine()
     try {
         val selectedChice = choice!!.toInt()
