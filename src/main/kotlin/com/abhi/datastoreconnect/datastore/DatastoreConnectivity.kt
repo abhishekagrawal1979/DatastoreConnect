@@ -1,26 +1,18 @@
 package com.abhi.datastoreconnect.datastore
 
-import com.google.cloud.datastore.*
-import java.util.ArrayList
+import com.google.cloud.datastore.DatastoreException
 
+class DatastoreConnectivity {
 
-fun checkConnectivity(){
+    fun checkConnectivity() {
         try {
-            val dataStore = DatastoreOptions.newBuilder()
-                    .build().service
-            val query: Query<Key> = Query.newKeyQueryBuilder()
-                    .setKind("__namespace__")
-                    .build()
-
-            val namespaces = ArrayList<String>();
-            val results = dataStore.run(query);
-            while (results.hasNext()) {
-                namespaces.add(results.next().getName());
-            }
-            print(namespaces)
+            val lds = LocalDatastore()
+            val namespaces= lds.getDatastoreData("__namespace__","","")
+            println("Your connectivity to the datastore has been checked and you are connected to ${System.getenv("DATASTORE_EMMULATOR_HOST")}")
         } catch (e: DatastoreException) {
             println(e)
         }
 
     }
 
+}

@@ -1,29 +1,37 @@
 package com.abhi.datastoreconnect
-
-import com.abhi.datastoreconnect.datastore.checkConnectivity
+import com.abhi.datastoreconnect.datastore.DatastoreConnectivity
+import com.abhi.datastoreconnect.datastore.Namespace
 import java.lang.Exception
 
 fun main(){
-    checkConnectivity()
-    println("Please select what you want to deal with!!")
-    println("1. Namespace")
-    println("2. Kind")
-    println("3. Entity")
 
-    val a= print("Please enter the numerical choice here: ")
+    val dc =  DatastoreConnectivity()
+    dc.checkConnectivity()
+
+    println(Options.PleaseSelect.description)
+    println("${Options.Namespace.options.get(2)}. ${Options.Namespace.description}")
+    println("${Options.Kind.options.get(3)}. ${Options.Kind.description}")
+    println("${Options.Entity.options.get(4)}. ${Options.Entity.description}")
+
+   print("Please enter the numerical choice here: ..")
+
     val i:Int=0
     while (i == 0) {
         try {
             val choice = readLine()
             val selectedChice = choice!!.toInt()
             println("selected choice is $selectedChice")
+            println(selectedChice)
+            val ns=Namespace()
+
+            ns.getAll()
             break
         } catch (e: Exception) {
-            println("Please enter numeric")
+            println("Invalid choice!! Please enter numeric value.")
             continue
         }
     }
-    println(a)
+
     val b= readLine()
     println(b)
 }
