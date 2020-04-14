@@ -1,9 +1,6 @@
 package com.abhi.datastoreconnect.datastore
 
-import com.google.cloud.datastore.Datastore
-import com.google.cloud.datastore.DatastoreOptions
-import com.google.cloud.datastore.Key
-import com.google.cloud.datastore.Query
+import com.google.cloud.datastore.*
 import java.util.ArrayList
 
 class LocalDatastore {
@@ -26,7 +23,7 @@ class LocalDatastore {
 
 
         val namespaces = ArrayList<String>()
-        val results = ds.run(qr)
+        val results:QueryResults<Key> = ds.run(qr)
         while (results.hasNext()) {
             namespaces.add(results.next().name)
         }
