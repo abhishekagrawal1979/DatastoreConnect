@@ -31,7 +31,6 @@ fun main(){
             continue
         }
     }
-
     val b= readLine()
     println(b)
 }

@@ -11,8 +11,8 @@ class Namespace :INamespace {
     }
 
     override fun getAll() {
-        val lds = LocalDatastore()
-        val namespaces= lds.getDatastoreData("__namespace__","","")
+        val lds = DatastoreRepository()
+        val namespaces= lds.getMetadataList("__namespace__","","")
         println(namespaces)
     }
 
