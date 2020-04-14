@@ -16,15 +16,12 @@ class LocalDatastoreTests {
     fun `this is a test test`(){
 
         val mockLocalDatastore = mockk<LocalDatastore>()
-
-        val mockDatastore = mockk<Datastore>()
-        val query: Query<Key> = Query.newKeyQueryBuilder()
+     val query: Query<Key> = Query.newKeyQueryBuilder()
             .setKind("__namespace__")
             .build()
 
-//       every { mockDatastore.run(query)  } returns QueryResults<arrayOf>
-        every { mockDatastore.run(query)} returns mockk()
-        mockLocalDatastore.getDatastoreData2(mockDatastore,query,"__namespace__","","")
+
+        every { mockLocalDatastore.getDatastoreData2(query,"__namespace__","","")} returns ArrayList()
 
         verify { mockDatastore.run(query)}
 
