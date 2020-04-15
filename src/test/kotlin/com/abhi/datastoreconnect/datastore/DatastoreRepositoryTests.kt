@@ -22,6 +22,7 @@ class DatastoreRepositoryTests() {
         val mockQueryResults = mockk<QueryResults<Key>>()
         every { mockDatastore.run(query) } returns mockQueryResults
         every { mockQueryResults.hasNext() } returns true
+        every { mockQueryResults.next().name } returns "chintu"
 
         objDatastoreRepository.getMetadataList("__namespace__", "", "")
        verify { mockDatastore.run(query) }

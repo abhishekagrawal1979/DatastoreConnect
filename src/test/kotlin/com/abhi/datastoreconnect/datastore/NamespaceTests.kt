@@ -16,29 +16,37 @@ class NamespaceTests {
     fun `this is a getNamespace test`() {
         val mockDatastore = mockk<Datastore>()
         val objNamespace = Namespace(mockDatastore)
+        val mocknamespace=mockk<Namespace>()
         val mockDatastoreRepository = mockk<DatastoreRepository>()
 
-//
-//        every { mockDatastoreRepository.getMetadataList("__namespace__", "", "") } returns arrayListOf(
-//            "Abhinamespace",
-//            "Satishnamespace"
-//        )
+
+        every { mockDatastoreRepository.getMetadataList("__namespace__", "", "") } returns arrayListOf(
+            "Abhinamespace",
+            "Satishnamespace"
+        )
 
         every { mockDatastoreRepository.getMetadataList("", "", "") } returns arrayListOf(
             "Abhinamespace",
             "Satishnamespace"
         )
 
-//        mockDatastoreRepository.getMetadataList("__namespace__", "", "")
-        every { DatastoreRepository(mockDatastore).getMetadataList("__namespace__", "", "") } returns arrayListOf(
+        every { mocknamespace.getAll2("Abhishek") } returns "Satish"
+
+      mockDatastoreRepository.getMetadataList("__namespace__", "", "")
+        every { mockDatastoreRepository.getMetadataList("__namespace__", "", "") } returns arrayListOf(
             "Abhinamespace",
             "Satishnamespace"
         )
 
+//        every { mockDatastore.run(query) } returns mockQueryResults
+
+
 //        println(DatastoreRepository(mockDatastore).getMetadataList("__namespace__", "", ""))
 
-        objNamespace.getAll2()
-        verify { mockDatastoreRepository.getMetadataList("", "", "") }
+//        objNamespace.getAll()
+        val b =objNamespace.getAll2("Abhishek")
+        println(b)
+        verify { mockDatastoreRepository.getMetadataList("__namespace__", "", "") }
 
     }
 }

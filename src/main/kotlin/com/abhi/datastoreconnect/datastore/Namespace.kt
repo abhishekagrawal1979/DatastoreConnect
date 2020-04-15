@@ -17,10 +17,8 @@ class Namespace(val datastore:Datastore) :INamespace {
         val namespaces= lds.getMetadataList("__namespace__","","")
         println(namespaces)
     }
-     fun getAll2() {
-        val lds = DatastoreRepository(datastore)
+     fun getAll2(name:String):String     {
 
-        val namespaces= lds.getMetadataList("","","")
-        println(namespaces)
+         if (name=="Abhishek") return "A" else return "B"
     }
 }

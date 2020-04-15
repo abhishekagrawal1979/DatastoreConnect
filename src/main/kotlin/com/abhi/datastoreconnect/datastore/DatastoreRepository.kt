@@ -7,9 +7,6 @@ class DatastoreRepository(val datastore: Datastore) {
 
     fun getMetadataList(kind:String,namespace:String,entity:String):ArrayList<String> {
 
-        if(kind=="" && namespace=="" && entity=="" )
-            return arrayListOf("timepass","check")
-
         val query: Query<Key> = Query.newKeyQueryBuilder()
             .setKind(kind)
             .build()
