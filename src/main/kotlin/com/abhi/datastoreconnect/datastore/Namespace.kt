@@ -1,8 +1,9 @@
 package com.abhi.datastoreconnect.datastore
 
 import com.abhi.datastoreconnect.Options
+import com.google.cloud.datastore.Datastore
 
-class Namespace :INamespace {
+class Namespace(val datastore:Datastore) :INamespace {
 
     override fun showOptions(){
         println("${Options.Namespace.options.get(1)}. ${Options.Namespace.description}")
@@ -11,9 +12,15 @@ class Namespace :INamespace {
     }
 
     override fun getAll() {
-        val lds = DatastoreRepository()
+        val lds = DatastoreRepository(datastore)
+
         val namespaces= lds.getMetadataList("__namespace__","","")
         println(namespaces)
     }
+     fun getAll2() {
+        val lds = DatastoreRepository(datastore)
 
+        val namespaces= lds.getMetadataList("","","")
+        println(namespaces)
+    }
 }

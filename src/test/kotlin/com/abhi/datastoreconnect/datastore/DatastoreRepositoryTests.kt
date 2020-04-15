@@ -1,5 +1,9 @@
 package com.abhi.datastoreconnect.datastore
 
+import com.google.cloud.datastore.Datastore
+import com.google.cloud.datastore.Key
+import com.google.cloud.datastore.Query
+import com.google.cloud.datastore.QueryResults
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
@@ -9,19 +13,18 @@ class DatastoreRepositoryTests() {
     @Test
     fun `this is a getNamespace test`() {
 
-        val mockDatastoreRepository = mockk<DatastoreRepository>()
-//        val mockNamespace = mockk<Namespace>()
-        every { mockDatastoreRepository.getMetadataList("__namespace__", "", "") } returns arrayListOf(
-            "Abhinamespace",
-            "Satishnamespace"
-        )
-        val objNamespace = Namespace()
+        val mockDatastore = mockk<Datastore>()
+        val objDatastoreRepository =DatastoreRepository(mockDatastore)
+        val query: Query<Key> = Query.newKeyQueryBuilder()
+            .setKind("__namespace__")
+            .build()
 
-        every { objNamespace.getAll() } returns Unit
-        mockDatastoreRepository.getMetadataList("__namespace__", "", "")
-        objNamespace.getAll()
+        val mockQueryResults = mockk<QueryResults<Key>>()
+        every { mockDatastore.run(query) } returns mockQueryResults
+        every { mockQueryResults.hasNext() } returns true
 
-        verify { mockDatastoreRepository.getMetadataList("__namespace__", "", "") }
+        objDatastoreRepository.getMetadataList("__namespace__", "", "")
+       verify { mockDatastore.run(query) }
 
     }
 }

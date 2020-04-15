@@ -1,11 +1,15 @@
 package com.abhi.datastoreconnect
 import com.abhi.datastoreconnect.datastore.DatastoreConnectivity
 import com.abhi.datastoreconnect.datastore.Namespace
+import com.google.cloud.datastore.DatastoreOptions
 import java.lang.Exception
 
 fun main(){
 
-    val dc =  DatastoreConnectivity()
+    val dataStore = DatastoreOptions.newBuilder()
+        .build().service
+
+    val dc =  DatastoreConnectivity(dataStore)
     dc.checkConnectivity()
 
     println(Options.PleaseSelect.description)
@@ -22,7 +26,7 @@ fun main(){
             val selectedChice = choice!!.toInt()
             println("selected choice is $selectedChice")
             println(selectedChice)
-            val ns=Namespace()
+            val ns=Namespace(dataStore)
 
             ns.getAll()
             break
